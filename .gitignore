@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# dotenv environment variable files
+.env
+
+# Logs
+logs
+*.log
+
+# Optional npm cache directory
+.npm
+
+# Temporary files
+.DS_Store
