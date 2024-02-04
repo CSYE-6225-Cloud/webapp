@@ -2,7 +2,7 @@ import { config } from "dotenv";
 config();
 import { Sequelize } from "sequelize";
 
-export const sequelize = new Sequelize(
+export const sequelizeInstance = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASSWORD,
@@ -14,7 +14,7 @@ export const sequelize = new Sequelize(
 
 export const connection = async () => {
   try {
-    await sequelize.authenticate();
+    await sequelizeInstance.authenticate();
     return true;
   } catch (error) {
     return false;
