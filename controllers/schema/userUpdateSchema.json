@@ -8,10 +8,12 @@
     "lastName": {
       "type": "string"
     },
+    "username": {
+      "type": "string"
+    },
     "password": {
       "type": "string"
     }
   },
-  "required": ["firstName", "lastName", "password"],
   "additionalProperties": false
 }

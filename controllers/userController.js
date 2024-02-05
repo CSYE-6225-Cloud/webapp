@@ -1,6 +1,7 @@
 import User from "../modules/user.js";
 import * as encryptFunction from "./auth/encrypt.js";
 import userSchema from "./schema/userSchema.json" assert { type: "json" };
+import userUpdateSchema from "./schema/userUpdateSchema.json" assert { type: "json" };
 import { validate } from "jsonschema";
 
 export const createUser = async (request, response) => {
@@ -84,6 +85,69 @@ export const authorizeAndGetUser = async (request, response) => {
       account_updated: existingUser.updatedAt.toISOString(),
     };
     response.status(200).json(responseObject).send();
+  } catch {
+    response.status(400).send();
+  }
+};
+
+export const updateUser = async (request, response) => {
+  try {
+    const authorizationHeader = request.headers.authorization;
+    if (!authorizationHeader) {
+      response.status(401).send();
+      return;
+    }
+    const decodedCredentials = Buffer.from(
+      authorizationHeader.split(" ")[1],
+      "base64"
+    )
+      .toString()
+      .split(":");
+    const username = decodedCredentials[0];
+    const password = decodedCredentials[1];
+    const existingUser = await User.findOne({
+      where: { username: username },
+    });
+    if (!existingUser) {
+      response.status(401).send();
+    }
+    const comparePasswords = await encryptFunction.comparePasswords(
+      password,
+      existingUser.password
+    );
+    if (!comparePasswords) {
+      response.status(401).send();
+      return;
+    }
+
+    const validateJsonSchema = validate(request.body, userUpdateSchema);
+    if (!validateJsonSchema.valid) {
+      console.log("invalid json schema");
+      response.status(400).send();
+    }
+
+    const updateUser = {};
+
+    if (request.body.firstName) {
+      updateUser.firstName = request.body.firstName;
+    }
+    if (request.body.lastName) {
+      updateUser.lastName = request.body.lastName;
+    }
+    if (request.body.password) {
+      const newHashedPassword = await encryptFunction.hashPassword(
+        request.body.password
+      );
+      updateUser.password = newHashedPassword;
+    }
+    updateUser.account_updated = new Date().toISOString();
+
+    if (Object.keys(updateUser).length > 0) {
+      const updatedUser = await existingUser.update(updateUser);
+      response.status(204).json(updatedUser).send();
+    } else {
+      response.status(400).send();
+    }
   } catch {
     response.status(400).send();
   }
