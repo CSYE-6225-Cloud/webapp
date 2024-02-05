@@ -15,5 +15,6 @@
       "type": "string"
     }
   },
-  "required": ["firstName", "lastName", "username", "password"]
+  "required": ["firstName", "lastName", "username", "password"],
+  "additionalProperties": false
 }
