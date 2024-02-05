@@ -1,10 +1,14 @@
-import { Router } from "express";
 import * as userController from "../controllers/userController.js";
+import express from "express";
+const router = express.Router();
 
-const router = Router();
+router.route("/").post(userController.createUser);
 
-router.post("/user", userController.createUser);
-router.get("/user/self", userController.authorizeAndGetUser);
-router.put("/user/self", userController.updateUser);
+router
+  .route("/self")
+  .get(userController.authorizeAndGetUser)
+  .put(userController.updateUser);
+
+router.route("*").all(userController.userOtherRoutes);
 
 export default router;

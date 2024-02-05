@@ -1,10 +1,14 @@
-import { Router } from "express";
+import express from "express";
+const router = express.Router();
+
 import * as healthzController from "../controllers/healthzController.js";
 
-const router = Router();
+router
+  .route("/")
+  .head(healthzController.healthzHeadOptions)
+  .get(healthzController.healthzGet)
+  .all(healthzController.heathzAllMethods);
 
-router.head("/healthz", healthzController.healthzHeadOptions);
-router.get("/healthz", healthzController.healthzGet);
-router.all("/healthz", healthzController.heathzAllMethods);
+router.route("*").all(healthzController.heathzOtherRoutes);
 
 export default router;
