@@ -2,7 +2,10 @@ name: Node JS CI actions
 
 on:
   pull_request:
-    branches: [main]
+    types:
+      - opened
+    branches:
+      - main
 
 jobs:
   build:
