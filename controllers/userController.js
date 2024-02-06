@@ -7,10 +7,20 @@ import { validate } from "jsonschema";
 
 export const createUser = async (request, response) => {
   const dbConnection = await connection();
+
+  //Service unavailable if database is not connected
   if (!dbConnection) {
     response.status(503).send();
     return;
   } else {
+    if (Object.keys(request.query).length != 0) {
+      //Bad request since api has query params
+      console.log("params or header/options");
+      response.status(400).send();
+      return;
+    }
+
+    //Bad request if body has invalid json schema
     const validateJsonSchema = validate(request.body, userSchema);
     if (!validateJsonSchema.valid) {
       console.log("invalid json schema");
@@ -22,6 +32,7 @@ export const createUser = async (request, response) => {
       where: { username: request.body.username },
     });
 
+    //Bad request if username is already existing
     if (existingUser) {
       console.log("user already exists");
       response.status(400).send();
@@ -59,12 +70,14 @@ export const createUser = async (request, response) => {
 
 export const authorizeAndGetUser = async (request, response) => {
   const dbConnection = await connection();
+  //Service unavailable if database is not connected
   if (!dbConnection) {
     response.status(503).send();
     return;
   } else {
     try {
       const authorizationHeader = request.headers.authorization;
+      //Unauthorized user
       if (!authorizationHeader) {
         response.status(401).send();
         return;
@@ -79,7 +92,7 @@ export const authorizeAndGetUser = async (request, response) => {
         Object.keys(request.body).length != 0 ||
         Object.keys(request.query).length != 0
       ) {
-        //Bad request since api is sending a body or has query params & check for head and options
+        //Bad request since api is sending a body or has query params
         response.status(400).send();
         return;
       }
@@ -123,12 +136,21 @@ export const authorizeAndGetUser = async (request, response) => {
 };
 
 export const updateUser = async (request, response) => {
+  //Service unavailable if database is not connected
   const dbConnection = await connection();
   if (!dbConnection) {
     response.status(503).send();
     return;
   } else {
     try {
+      if (Object.keys(request.query).length != 0) {
+        //Bad request since api has query params
+        console.log("params or header/options");
+        response.status(400).send();
+        return;
+      }
+
+      //Unauthorized if no basic auth credentials provided
       const authorizationHeader = request.headers.authorization;
       if (!authorizationHeader) {
         response.status(401).send();
@@ -145,6 +167,8 @@ export const updateUser = async (request, response) => {
       const existingUser = await User.findOne({
         where: { username: username },
       });
+
+      //Unauthorzied if user is not existing
       if (!existingUser) {
         response.status(401).send();
         return;
@@ -153,11 +177,21 @@ export const updateUser = async (request, response) => {
         password,
         existingUser.password
       );
+
+      //Unauthorzied if wrong password provided
       if (!comparePasswords) {
         response.status(401).send();
         return;
       }
 
+      //Bad request if body is not in JSON format
+      const contentType = request.get("Content-Type");
+      if (!contentType || contentType !== "application/json") {
+        response.status(400).send();
+        return;
+      }
+
+      //Bad request if body invalid JSON schema
       const validateJsonSchema = validate(request.body, userUpdateSchema);
       if (!validateJsonSchema.valid) {
         console.log("invalid json schema");
@@ -195,7 +229,17 @@ export const updateUser = async (request, response) => {
   }
 };
 
+//Head method not allowed
+export const userHeadOptions = async (request, response) => {
+  response.status(405).send();
+};
+
 //wrong routes
 export const userOtherRoutes = (request, response) => {
   response.status(404).send();
+};
+
+//deny other methods
+export const userAllMethods = (request, response) => {
+  response.status(405).send();
 };

@@ -34,8 +34,12 @@ const User = sequelizeInstance.define("user", {
   },
 });
 
-User.sync({ force: true }).then(() => {
-  console.log("User model is synced");
-});
+User.sync()
+  .then(() => {
+    console.log("User model is synced");
+  })
+  .catch((error) => {
+    console.error("Error syncing the model");
+  });
 
 export default User;
