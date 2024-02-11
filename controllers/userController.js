@@ -1,8 +1,8 @@
 import User from "../modules/user.js";
 import { connection } from "../services/database.js";
 import * as encryptFunction from "./auth/encrypt.js";
-import userSchema from "./schema/userSchema.json" assert { type: "json" };
-import userUpdateSchema from "./schema/userUpdateSchema.json" assert { type: "json" };
+import { userSchema } from "./schema/userSchema.js";
+import { userUpdateSchema } from "./schema/userUpdateSchema.js";
 import { validate } from "jsonschema";
 
 export const createUser = async (request, response) => {

@@ -9,6 +9,7 @@ export const sequelizeInstance = new Sequelize(
   {
     host: process.env.HOST,
     dialect: process.env.DIALECT,
+    logging: false,
   }
 );
 

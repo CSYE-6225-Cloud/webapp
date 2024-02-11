@@ -1,11 +1,11 @@
 import express from "express";
 import { config } from "dotenv";
 import router from "./routes/index.js";
-
+import { syncDb } from "./modules/user.js";
 
 config();
-
-const app = express();
+syncDb();
+export const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
