@@ -3,7 +3,7 @@ import { app } from "../app.js";
 import User from "../modules/user.js";
 
 describe("Test 1 & 2", () => {
-  beforeAll(async () => {
+  afterAll(async () => {
     await User.destroy({ where: {} });
   });
 
