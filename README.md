@@ -1,4 +1,4 @@
-CSYE-6225-Assignment 2
+CSYE-6225-Assignment-2
 
 # Reference links:
 
