@@ -35,9 +35,9 @@ jobs:
       - name: Run Test
         run: npm test
         env:
-          PORT: 3001
-          DB_NAME: cloud_assignment_db
-          DB_USER: payalkhatri
-          DB_PASSWORD: cloud123
+          PORT: ${{ secrets.ENV_PORT }}
+          DB_NAME: ${{ secrets.ENV_DB_NAME }}
+          DB_USER: ${{ secrets.ENV_DB_USER }}
+          DB_PASSWORD: ${{ secrets.ENV_DB_PASSWORD }}
           HOST: localhost
           DIALECT: postgres
