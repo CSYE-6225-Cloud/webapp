@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - opened
+      - synchronize
     branches:
       - main
 
@@ -14,7 +15,7 @@ jobs:
     env:
       POSTGRES_DB: cloud_assignment_db
       POSTGRES_USER: payalkhatri
-      POSTGRES_PASSWORD: postgresPassword
+      POSTGRES_PASSWORD: cloud123
       HOST: localhost
       DIALECT: postgres
     services:
@@ -38,6 +39,6 @@ jobs:
         env:
           DB_NAME: cloud_assignment_db
           DB_USER: payalkhatri
-          DB_PASSWORD: postgres
+          DB_PASSWORD: cloud123
           HOST: localhost
           DIALECT: postgres
