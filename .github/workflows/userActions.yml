@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     name: Run integration tests for users
     runs-on: ubuntu-latest
     env:
