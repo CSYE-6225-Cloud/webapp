@@ -1,8 +1,13 @@
 import request from "supertest";
 import { app } from "../app.js";
 import User from "../modules/user.js";
+import { connection } from "../services/database.js";
 
 describe("Test 1 & 2", () => {
+  beforeAll(async () => {
+    await connection();
+  });
+
   afterAll(async () => {
     await User.destroy({ where: {} });
   });

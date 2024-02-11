@@ -16,6 +16,7 @@ export const sequelizeInstance = new Sequelize(
 export const connection = async () => {
   try {
     await sequelizeInstance.authenticate();
+    console.log("authenticated");
     return true;
   } catch (error) {
     return false;
