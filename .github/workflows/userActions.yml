@@ -32,6 +32,8 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
+      - name: Printing secrets
+        run: echo "secrets.POSTGRES_USER is ${{ secrets.POSTGRES_DB }}"
       - name: Run Test
         run: npm test
         env:
