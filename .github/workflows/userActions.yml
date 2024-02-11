@@ -33,7 +33,5 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
-      #   - name: Wait for PostgreSQL to be ready
-      #     run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - name: Run Test
         run: npm test
