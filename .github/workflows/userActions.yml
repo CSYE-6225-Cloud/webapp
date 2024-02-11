@@ -16,9 +16,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: cloud_assignment_db
+          POSTGRES_USER: payalkhatri
+          POSTGRES_PASSWORD: cloud123
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready -U payalkhatri" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -32,10 +32,10 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
-      - name: Printing secrets
-        run: echo "secrets.POSTGRES_USER is ${{ secrets.POSTGRES_DB }}"
       - name: Run Test
         run: npm test
+      - name: Printing secrets
+        run: echo "secrets.POSTGRES_USER is ${{ secrets.POSTGRES_DB }}"
         env:
           PORT: 3001
           DB_NAME: cloud_assignment_db
