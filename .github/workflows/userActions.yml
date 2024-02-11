@@ -15,6 +15,8 @@ jobs:
       POSTGRES_DB: cloud_assignment_db
       POSTGRES_USER: payalkhatri
       POSTGRES_PASSWORD: postgres
+      HOST: localhost
+      DIALECT: postgres
     services:
       postgres:
         image: postgres:latest
@@ -22,6 +24,8 @@ jobs:
           POSTGRES_DB: cloud_assignment_db
           POSTGRES_USER: payalkhatri
           POSTGRES_PASSWORD: postgres
+          HOST: localhost
+          DIALECT: postgres
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready -U payalkhatri" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -35,7 +39,7 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
-      - name: Wait for PostgreSQL to be ready
-        run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      #   - name: Wait for PostgreSQL to be ready
+      #     run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - name: Run Test
         run: npm test
