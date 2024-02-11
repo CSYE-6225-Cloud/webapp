@@ -6,7 +6,6 @@ import { syncDb } from "./modules/user.js";
 config();
 syncDb();
 export const app = express();
-const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,7 +17,3 @@ app.use((request, response, next) => {
 });
 
 router(app);
-
-app.listen(port, function () {
-  console.log(`App is listening on port :${port}!`);
-});
