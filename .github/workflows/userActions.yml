@@ -12,18 +12,14 @@ jobs:
   build:
     name: Run integration tests for users
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        env:
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        ports:
-          - 5432:5432
-        options: --health-cmd="pg_isready -U payalkhatri" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: Create test database and user
+        run: |
+          sudo -u postgres psql -c "CREATE DATABASE ${{ secrets.POSTGRES_DB }};"
+          sudo -u postgres psql -c "CREATE USER ${{ secrets.POSTGRES_USER }} WITH PASSWORD '${{ secrets.POSTGRES_PASSWORD }}';"
+          sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.POSTGRES_DB }} TO ${{ secrets.POSTGRES_USER }};"
       - name: Use Node.Js
         uses: actions/setup-node@v3
         with:
