@@ -16,9 +16,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Start postgres
-        run: systemctl start postgresql
+        run: sudo systemctl start postgresql
       - name: Enable postgress
-        run: systemctl enable postgresql
+        run: sudo systemctl enable postgresql
       - name: Create new user
         run: sudo -u postgres createuser --interactive
       - name: Add user
@@ -29,6 +29,8 @@ jobs:
         run: sudo -u postgres psql -c "ALTER user ${{ secrets.POSTGRES_USER }} with password '${{ secrets.POSTGRES_PASSWORD }}';"
       - name: Granting new user all the previleges
         run: sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.POSTGRES_DB }} TO ${{ secrets.POSTGRES_USER }};"
+      - name: Restarting postgresql
+        run: sudo systemctl restart postgresql
       - name: Use Node.Js
         uses: actions/setup-node@v3
         with:
