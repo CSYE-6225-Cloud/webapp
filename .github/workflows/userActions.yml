@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  webapp_tests:
     name: Run integration tests for users
     runs-on: ubuntu-latest
     steps:
