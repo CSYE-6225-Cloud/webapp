@@ -19,14 +19,8 @@ jobs:
         run: sudo systemctl start postgresql
       - name: Enable postgress
         run: sudo systemctl enable postgresql
-      - name: Add user
-        run: sudo adduser  ${{ secrets.POSTGRES_USER }}
       - name: Create database
-        run: sudo -u ${{ secrets.POSTGRES_USER }} createdb  ${{ secrets.POSTGRES_DB }}
-      - name: Altering the user
-        run: sudo -u postgres psql -c "ALTER user ${{ secrets.POSTGRES_USER }} with password '${{ secrets.POSTGRES_PASSWORD }}';"
-      - name: Granting new user all the previleges
-        run: sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.POSTGRES_DB }} TO ${{ secrets.POSTGRES_USER }};"
+        run: sudo -u postgres createdb  ${{ secrets.POSTGRES_DB }}
       - name: Restarting postgresql
         run: sudo systemctl restart postgresql
       - name: Use Node.Js
