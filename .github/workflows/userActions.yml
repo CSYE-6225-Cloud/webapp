@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     name: Run integration tests for users
     runs-on: ubuntu-latest
     steps:
