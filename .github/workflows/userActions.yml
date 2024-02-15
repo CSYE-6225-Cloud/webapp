@@ -19,8 +19,6 @@ jobs:
         run: sudo systemctl start postgresql
       - name: Enable postgress
         run: sudo systemctl enable postgresql
-      - name: Create new user
-        run: sudo -u postgres createuser --interactive
       - name: Add user
         run: sudo adduser  ${{ secrets.POSTGRES_USER }}
       - name: Create database
