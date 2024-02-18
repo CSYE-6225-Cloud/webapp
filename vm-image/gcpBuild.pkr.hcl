@@ -8,16 +8,16 @@ packer {
 }
 
 variable "project_id" {
-  type    =      string
+  type    = string
   default = "csye6225-a03"
 }
 
-variable     "zone" {
+variable "zone" {
   type    = string
   default = "us-east4-c"
 }
 
-variable     "source_image_family" {
+variable "source_image_family" {
   type    = string
   default = "centos-stream-8"
 }
@@ -47,7 +47,7 @@ source "googlecompute" "csye6225-app-custom-image" {
 }
 
 build {
-  sources =    [
+  sources = [
     "sources.googlecompute.csye6225-app-custom-image"
   ]
 
