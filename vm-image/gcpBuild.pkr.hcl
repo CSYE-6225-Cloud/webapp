@@ -17,7 +17,7 @@ variable     "zone" {
   default = "us-east4-c"
 }
 
-variable "source_image_family" {
+variable     "source_image_family" {
   type    = string
   default = "centos-stream-8"
 }
