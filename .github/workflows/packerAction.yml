@@ -33,7 +33,9 @@ jobs:
 
       - name: Check if formatting changed files
         if: steps.format.outputs.changed == 'true'
-        run: exit 1
+        run: |
+          echo "Formatting changed: ${{ steps.format.outputs.changed }}"
+          exit 1
 
       - name: Init and Validate Packer Configs
         run: |
