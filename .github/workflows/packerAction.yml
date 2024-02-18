@@ -23,7 +23,8 @@ jobs:
           cd vm-image/
           packer fmt gcpBuild.pkr.hcl
 
-      - name: Validate Packer Configs
+      - name: Init and Validate Packer Configs
         run: |
           cd vm-image/
+          packer init gcpBuild.pkr.hcl
           packer validate gcpBuild.pkr.hcl
