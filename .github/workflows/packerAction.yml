@@ -18,14 +18,12 @@ jobs:
       - name: Setup Packer
         uses: hashicorp/setup-packer@main
 
-      - name: Go inside vm-image Folder
-        run: cd vm-image/
-
       - name: Format Packer Configs
-        run: packer fmt gcpBuild.pkr.hcl
-
-      - name: Go inside vm-image Folder
-        run: cd vm-image/
+        run: |
+          cd vm-image/
+          packer fmt gcpBuild.pkr.hcl
 
       - name: Validate Packer Configs
-        run: packer validate gcpBuild.pkr.hcl
+        run: |
+          cd vm-image/
+          packer validate gcpBuild.pkr.hcl
