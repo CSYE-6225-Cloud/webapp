@@ -28,7 +28,8 @@ jobs:
       - name: Format Packer Configs
         run: |
           cd vm-image/
-          packer fmt gcpBuild.pkr.hcl || echo "::set-output name=changed::true"
+          packer fmt -check -recursive -diff gcpBuild.pkr.hcl || echo "::set-output name=changed::true"
+          echo "Formatting check complete"
 
       - name: Check if formatting changed files
         if: steps.format.outputs.changed == 'true'
