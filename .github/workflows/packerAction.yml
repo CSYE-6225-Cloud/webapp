@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Packer
-        run: hashicorp/setup-packer@v1
+        uses: hashicorp/setup-packer@main
 
       - name: Go inside vm-image Folder
         run: cd vm-image/
