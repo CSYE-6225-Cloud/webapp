@@ -47,7 +47,7 @@ source "googlecompute" "csye6225-app-custom-image" {
 }
 
 build {
-  sources = [
+  sources =    [
     "sources.googlecompute.csye6225-app-custom-image"
   ]
 
