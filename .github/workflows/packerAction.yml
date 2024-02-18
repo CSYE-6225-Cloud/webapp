@@ -25,17 +25,11 @@ jobs:
       - name: Move Zip to Workflows Directory
         run: mv webapp.zip vm-image/
 
-      - name: Format Packer Configs Check
+      - name: Format Packer Configs
         run: |
           cd vm-image/
-          if packer fmt -check -diff gcpBuild.pkr.hcl; then
-            echo "No formatting changes detected"
-            echo "::set-output name=changed::false"
-          else
-            echo "Formatting changes detected"
-            echo "::set-output name=changed::true"
-            exit 1
-          fi
+          packer fmt gcpBuild.pkr.hcl
+          git --diff --exit-code gcpBuild.pkr.hcl
 
       - name: Init and Validate Packer Configs
         run: |
