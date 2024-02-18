@@ -23,7 +23,7 @@ jobs:
           zip -r webapp.zip .
 
       - name: Move Zip to Workflows Directory
-        run: mv webapp.zip .github/workflows/
+        run: mv webapp.zip vm-image/
 
       - name: Format Packer Configs
         run: |
