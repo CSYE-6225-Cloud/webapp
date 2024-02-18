@@ -8,11 +8,11 @@ packer {
 }
 
 variable "project_id" {
-  type    = string
+  type    =      string
   default = "csye6225-a03"
 }
 
-variable "zone" {
+variable     "zone" {
   type    = string
   default = "us-east4-c"
 }
