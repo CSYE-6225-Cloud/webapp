@@ -1,0 +1,31 @@
+name: Packer Continuous Integration Actions to Build custom image
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
+
+jobs:
+  packer_template_validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Packer
+        run: hashicorp/setup-packer@v1
+
+      - name: Go inside vm-image Folder
+        run: cd vm-image/
+
+      - name: Format Packer Configs
+        run: packer fmt gcpBuild.pkr.hcl
+
+      - name: Go inside vm-image Folder
+        run: cd vm-image/
+
+      - name: Validate Packer Configs
+        run: packer validate gcpBuild.pkr.hcl
