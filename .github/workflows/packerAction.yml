@@ -25,7 +25,7 @@ jobs:
       - name: Move Zip to Workflows Directory
         run: mv webapp.zip vm-image/
 
-      - name: Format Packer Configs
+      - name: Format Packer Configs Check
         run: |
           cd vm-image/
           if packer fmt -check -diff gcpBuild.pkr.hcl; then
