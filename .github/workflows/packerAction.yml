@@ -18,10 +18,21 @@ jobs:
       - name: Setup Packer
         uses: hashicorp/setup-packer@main
 
+      - name: Create Zip File of Webapp Repo
+        run: |
+          zip -r webapp.zip .
+
+      - name: Move Zip to Workflows Directory
+        run: mv webapp.zip .github/workflows/
+
       - name: Format Packer Configs
         run: |
           cd vm-image/
-          packer fmt gcpBuild.pkr.hcl
+          packer fmt gcpBuild.pkr.hcl || echo "::set-output name=changed::true"
+
+      - name: Check if formatting changed files
+        if: steps.format.outputs.changed == 'true'
+        run: exit 1
 
       - name: Init and Validate Packer Configs
         run: |
