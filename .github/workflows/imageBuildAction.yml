@@ -3,13 +3,13 @@ name: Integration Actions to Build Custom Image
 on:
   pull_request:
     types:
-      - opened
-      - synchronize
+      - closed
     branches:
       - main
 
 jobs:
   if_pull_request_merge:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
