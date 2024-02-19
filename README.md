@@ -5,6 +5,7 @@ CSYE-6225-Assignment-3
 1. https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/
 2. https://www.geeksforgeeks.org/basic-authentication-in-node-js-using-http-header/
 3. https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+4. https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
 # Check Covered:
 

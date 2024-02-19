@@ -1,0 +1,43 @@
+name: Integration Actions to Build Custom Image
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  if_pull_request_merge:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: GCP Authentication
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.IAM_SERVICE_ACCOUNT }}"
+
+      - name: Set up Cloud SDK
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: Use gcloud CLI
+        run: "gcloud info"
+
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@main
+
+      - name: Create Zip File of Webapp Repo
+        run: |
+          zip -r webapp.zip .
+
+      - name: Move Zip to Workflows Directory
+        run: mv webapp.zip vm-image/
+
+      - name: Init and Build Custom Image
+        run: |
+          cd vm-image/
+          packer init gcpBuild.pkr.hcl
+          packer build gcpBuild.pkr.hcl

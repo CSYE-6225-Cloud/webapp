@@ -1,4 +1,4 @@
-name: Packer Continuous Integration Actions to Build custom image
+name: Packer Continuous Integration Actions For Status Check
 
 on:
   pull_request:
