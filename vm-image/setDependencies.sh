@@ -10,4 +10,8 @@ sudo npm install
 
 echo "NPM packages installed successfully."
 
+echo "sleep start"
+
+sleep 15m
+
 
