@@ -3,14 +3,26 @@ name: Integration Actions to Build Custom Image
 on:
   pull_request:
     types:
-      - closed
+      - opened
+      - synchronize
     branches:
       - main
 
 jobs:
   if_pull_request_merge:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      PORT: ${{ secrets.ENV_PORT }}
+      DB_NAME: ${{ secrets.POSTGRES_DB }}
+      DB_USER: ${{ secrets.POSTGRES_USER }}
+      DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      HOST: ${{ vars.HOST}}
+      DIALECT: ${{vars.DIALECT}}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      ZONE: ${{vars.ZONE}}
+      SOURCE_IMAGE_FAMILY: ${{ vars.SOURCE_IMAGE_FAMILY }}
+      SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4

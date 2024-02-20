@@ -9,17 +9,17 @@ packer {
 
 variable "project_id" {
   type    = string
-  default = "csye6225-a03"
+  default = env("PROJECT_ID")
 }
 
 variable "zone" {
   type    = string
-  default = "us-east4-c"
+  default = env("ZONE")
 }
 
 variable "source_image_family" {
   type    = string
-  default = "centos-stream-8"
+  default = env("SOURCE_IMAGE_FAMILY")
 }
 
 variable "disk_type" {
@@ -29,9 +29,29 @@ variable "disk_type" {
 
 variable "disk_size" {
   type    = number
-  default = 20
+  default = 100
 }
 
+
+variable "db_name" {
+  type= string
+  default= env("DB_NAME")
+}
+
+variable "db_user" {
+  type= string
+  default= env("DB_USER")
+}
+
+variable "db_password" {
+  type= string
+  default= env("DB_PASSWORD")
+}
+
+variable "ssh_username"{
+  type = string
+  default= env("SSH_USERNAME")
+}
 
 source "googlecompute" "csye6225-app-custom-image" {
   project_id              = var.project_id
@@ -43,7 +63,7 @@ source "googlecompute" "csye6225-app-custom-image" {
   image_description       = "Custom Image for GCP CSYE6225 app"
   image_family            = "csye6225-image-family"
   image_storage_locations = ["us"]
-  ssh_username            = "packer"
+  ssh_username            = var.ssh_username
 }
 
 build {
@@ -52,6 +72,10 @@ build {
   ]
 
   provisioner "shell" {
+    environment_vars = [ "DB_NAME=${var.db_name}",
+      "DB_USER=${var.db_user}",
+     "DB_PASSWORD=${var.db_password}"]
+
     scripts = [
       # "./update.sh",
       "./envSetup.sh",
