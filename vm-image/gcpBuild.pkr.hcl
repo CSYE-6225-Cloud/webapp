@@ -73,8 +73,8 @@ build {
   provisioner "shell" {
     scripts = [
       "./unzip.sh",
-      "./systemD/systemdSetup.sh",
-      "./setDependencies.sh"
+      "./setDependencies.sh",
+      "./systemD/systemdSetup.sh"
     ]
   }
 
