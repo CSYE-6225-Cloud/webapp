@@ -18,6 +18,7 @@ describe("Test 1 & 2", () => {
       lastName: "Khatri",
       username: "payalmahesh1@gmail.com",
       password: "payalmahesh12",
+      test: "test",
     });
 
     expect(createUser.status).toBe(201);
@@ -42,6 +43,7 @@ describe("Test 1 & 2", () => {
         firstName: "Payal Mahesh1",
         lastName: "Khatri1",
         password: "payalmahesh1",
+        test: "test",
       })
       .set("Authorization", `Basic ${updateAuthHeader}`);
 
