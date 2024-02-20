@@ -79,6 +79,7 @@ build {
     scripts = [
       # "./update.sh",
       "./envSetup.sh",
+      "./setEnvVariables.sh",
       "./dbSetup.sh",
 
     ]
