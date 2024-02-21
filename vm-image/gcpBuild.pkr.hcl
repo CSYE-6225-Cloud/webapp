@@ -120,7 +120,6 @@ build {
     scripts = [
       "./unzip.sh",
       "./setDependencies.sh",
-      "./createEnvFile.sh",
       "./systemD/systemdSetup.sh"
     ]
   }
