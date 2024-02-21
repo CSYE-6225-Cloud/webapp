@@ -6,8 +6,11 @@ CSYE-6225-Assignment-3
 2. https://www.geeksforgeeks.org/basic-authentication-in-node-js-using-http-header/
 3. https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 4. https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+5. https://stackoverflow.com/questions/73755006/how-to-find-out-if-the-github-actions-event-that-triggered-the-current-workflow
+6. https://github.com/github/gitignore/blob/main/Packer.gitignore
+7. https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
 
-# Check Covered:
+# API Checks Covered:
 
 1. No query params accepted.
 2. No Request method except Get accepted for healthz.
@@ -21,6 +24,21 @@ CSYE-6225-Assignment-3
 10. Restarting the database without restarting the application works.
 11. Head and Options are restricted.
 
-# Command to run :
+# Git Action
+
+1. Integration tests are run at pull request and merge request
+2. Image is built on the runner after pull request is merged
+3. Artifact copied to the image are built from the Github repo
+
+# Command to run locally :
 
 npm start
+
+# Hit API on Postman
+
+On the external IP address of the Virtual Instance
+
+# IAM Service account has roles:
+
+1. Compute Instance Admin (v1)
+2. Service Account User

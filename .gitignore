@@ -32,3 +32,19 @@ logs
 
 #Cache
 .cache/
+
+# Cache objects
+packer_cache/
+
+# Crash log
+crash.log
+
+# Exclude all .pkrvars.hcl files
+*.pkrvars.hcl
+
+# For built boxes
+*.box
+
+# Packer build artifacts
+packer_cache/*
+*.pkr.hcl
