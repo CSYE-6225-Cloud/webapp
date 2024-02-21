@@ -22,7 +22,9 @@ jobs:
       ZONE: ${{vars.ZONE}}
       SOURCE_IMAGE_FAMILY: ${{ vars.SOURCE_IMAGE_FAMILY }}
       SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-
+      DISK_SIZE: ${{ vars.DISK_SIZE}}
+      DISK_TYPE: ${{ vars.DISK_TYPE }}
+      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4

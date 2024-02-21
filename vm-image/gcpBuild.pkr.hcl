@@ -24,12 +24,12 @@ variable "source_image_family" {
 
 variable "disk_type" {
   type    = string
-  default = "pd-standard"
+  default = env("DISK_TYPE")
 }
 
 variable "disk_size" {
   type    = number
-  default = 100
+  default = env("DISK_SIZE")
 }
 
 
@@ -92,7 +92,7 @@ build {
     "DB_PASSWORD=${var.db_password}"]
 
     scripts = [
-      # "./update.sh",
+       "./update.sh",
       "./envSetup.sh",
       "./dbSetup.sh",
 
@@ -115,7 +115,7 @@ build {
       "DB_PASSWORD=${var.db_password}",
       "PORT= ${var.port}",
       "HOST=${var.host}",
-    "DIALECT=${var.dialect}"]
+      "DIALECT=${var.dialect}"]
 
     scripts = [
       "./unzip.sh",

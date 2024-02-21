@@ -3,13 +3,13 @@ name: Integration Actions to Build Custom Image
 on:
   pull_request:
     types:
-      - opened
-      - synchronize
+      - closed
     branches:
       - main
 
 jobs:
   if_pull_request_merge:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       PORT: ${{ secrets.ENV_PORT }}
@@ -22,6 +22,8 @@ jobs:
       ZONE: ${{vars.ZONE}}
       SOURCE_IMAGE_FAMILY: ${{ vars.SOURCE_IMAGE_FAMILY }}
       SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+      DISK_SIZE: ${{ vars.DISK_SIZE}}
+      DISK_TYPE: ${{ vars.DISK_TYPE }}
 
     steps:
       - name: Checkout Repository
