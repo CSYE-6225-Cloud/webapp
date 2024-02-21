@@ -9,7 +9,7 @@ packer {
 
 variable "project_id" {
   type    = string
-  default = env("PROJECT_ID")
+  default =       env("PROJECT_ID")
 }
 
 variable "zone" {
