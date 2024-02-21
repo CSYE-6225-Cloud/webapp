@@ -11,7 +11,7 @@ on:
 
 jobs:
   webapp_tests:
-    if: github.event.pull_request.merged == true || github.event.pull_request.open == true || github.event.pull_request.synchronize == true
+    if: github.event.pull_request.merged == true || github.event.action == 'synchronize' ||  github.event.action == 'opened'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
