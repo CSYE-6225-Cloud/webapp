@@ -92,7 +92,7 @@ build {
     "DB_PASSWORD=${var.db_password}"]
 
     scripts = [
-       "./update.sh",
+      "./update.sh",
       "./envSetup.sh",
       "./dbSetup.sh",
 
@@ -115,7 +115,7 @@ build {
       "DB_PASSWORD=${var.db_password}",
       "PORT= ${var.port}",
       "HOST=${var.host}",
-      "DIALECT=${var.dialect}"]
+    "DIALECT=${var.dialect}"]
 
     scripts = [
       "./unzip.sh",
