@@ -21,6 +21,8 @@ END
 
 echo "$env_values" | sudo tee .env >/dev/null
 
+sudo chown csye6225:csye6225 .env -R 
+
 echo ".env file created"
 
 sudo npm install 
