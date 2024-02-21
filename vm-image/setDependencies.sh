@@ -12,6 +12,7 @@ cd /home/Cloud/webapp/ || exit
 env_values=$(cat <<END
 PORT=$PORT
 DB_NAME=$DB_NAME
+DB_USER=$DB_USER
 DB_PASSWORD=$DB_PASSWORD
 HOST=$HOST
 DIALECT=$DIALECT
