@@ -9,7 +9,7 @@ packer {
 
 variable "project_id" {
   type    = string
-  default =       env("PROJECT_ID")
+  default = env("PROJECT_ID")
 }
 
 variable "zone" {
@@ -69,7 +69,6 @@ variable "dialect" {
 }
 
 source "googlecompute" "csye6225-app-custom-image" {
-  project_id              = var.project_id
   source_image_family     = var.source_image_family
   zone                    = var.zone
   disk_size               = var.disk_size
