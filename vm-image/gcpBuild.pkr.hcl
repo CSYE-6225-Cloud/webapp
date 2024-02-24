@@ -17,7 +17,7 @@ variable "zone" {
   default = env("ZONE")
 }
 
-variable "source_image_family"   {
+variable "source_image_family" {
   type    = string
   default = env("SOURCE_IMAGE_FAMILY")
 }
@@ -69,7 +69,7 @@ variable "dialect" {
 }
 
 source "googlecompute" "csye6225-app-custom-image" {
-  project_id              = var.project_id
+  project_id              = var.project_i
   source_image_family     = var.source_image_family
   zone                    = var.zone
   disk_size               = var.disk_size
