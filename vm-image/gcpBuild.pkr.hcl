@@ -17,7 +17,7 @@ variable "zone" {
   default = env("ZONE")
 }
 
-variable "source_image_family" {
+variable "source_image_family"   {
   type    = string
   default = env("SOURCE_IMAGE_FAMILY")
 }
