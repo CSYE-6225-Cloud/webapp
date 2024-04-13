@@ -13,7 +13,7 @@ describe("Test 1 & 2", () => {
   });
 
   test("1: Create an account, and using the GET call, validate account exists", async () => {
-    const createUser = await request(app).post("/v1/user").send({
+    const createUser = await request(app).post("/v2/user").send({
       firstName: "Payal Mahesh",
       lastName: "Khatri",
       username: "payalmahesh1@gmail.com",
@@ -26,7 +26,7 @@ describe("Test 1 & 2", () => {
       "payalmahesh1@gmail.com:payalmahesh12"
     ).toString("base64");
     const checkUserExists = await request(app)
-      .get("/v1/user/self")
+      .get("/v2/user/self")
       .set("Authorization", `Basic ${authHeader}`);
 
     expect(checkUserExists.status).toBe(200);
@@ -37,7 +37,7 @@ describe("Test 1 & 2", () => {
       "payalmahesh1@gmail.com:payalmahesh12"
     ).toString("base64");
     const updateUser = await request(app)
-      .put("/v1/user/self")
+      .put("/v2/user/self")
       .send({
         firstName: "Payal Mahesh1",
         lastName: "Khatri1",
@@ -51,7 +51,7 @@ describe("Test 1 & 2", () => {
       "payalmahesh1@gmail.com:payalmahesh1"
     ).toString("base64");
     const checkUserExists = await request(app)
-      .get("/v1/user/self")
+      .get("/v2/user/self")
       .set("Authorization", `Basic ${authHeader}`);
 
     expect(checkUserExists.status).toBe(200);

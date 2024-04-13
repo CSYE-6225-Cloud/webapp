@@ -6,7 +6,7 @@ const pubSubClient = new PubSub({
 });
 
 export const publishMessage = async (topicName, payload) => {
-  const userData = { ...payload, version: "v1" };
+  const userData = { ...payload, version: "v2" };
 
   const dataBuffer = Buffer.from(JSON.stringify(userData));
   try {
